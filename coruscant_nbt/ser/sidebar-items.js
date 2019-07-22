@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["to_gzip_writer",""],["to_string_transcript",""],["to_vec",""],["to_writer",""],["to_zlib_writer",""]],"struct":[["BinaryFormatter",""],["Serializer",""],["TranscriptFormatter",""]],"trait":[["Formatter",""]]});
