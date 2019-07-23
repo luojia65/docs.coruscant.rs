@@ -114,6 +114,16 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
@@ -137,10 +147,13 @@
     <span class="ident">Io</span>(<span class="ident">io</span>::<span class="ident">Error</span>),
     <span class="ident">UnsupportedType</span>,
     <span class="ident">UnsupportedListInnerType</span>,
+    <span class="ident">UnsupportedArrayType</span>,
+    <span class="ident">UnsupportedArrayInnerType</span>,
     <span class="ident">InvalidStringLength</span>,
     <span class="ident">KeyMustBeAString</span>,
     <span class="ident">SequenceSizeUnknown</span>,
-    <span class="ident">SequenceDifferentType</span>,
+    <span class="ident">ListDifferentType</span>,
+    <span class="ident">ArrayDifferentType</span>,
     <span class="ident">InvalidBoolByte</span>,
 }
 
@@ -197,11 +210,18 @@
             <span class="ident">ErrorCode</span>::<span class="ident">Io</span>(<span class="kw-2">ref</span> <span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">fmt</span>::<span class="ident">Display</span>::<span class="ident">fmt</span>(<span class="ident">err</span>, <span class="ident">f</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported nbt type&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedListInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported list-wrapped type&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedArrayType</span> <span class="op">=&gt;</span> {
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported type for arrays; a sequence is required&quot;</span>)
+            }
+            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedArrayInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported array inner type&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">InvalidStringLength</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid string length&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">KeyMustBeAString</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;key must be a string&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">SequenceSizeUnknown</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;size of sequence is unknown&quot;</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">SequenceDifferentType</span> <span class="op">=&gt;</span> {
-                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one sequence do not have the same type&quot;</span>)
+            <span class="ident">ErrorCode</span>::<span class="ident">ListDifferentType</span> <span class="op">=&gt;</span> {
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one list do not have the same type&quot;</span>)
+            }
+            <span class="ident">ErrorCode</span>::<span class="ident">ArrayDifferentType</span> <span class="op">=&gt;</span> {
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one array do not have the same type&quot;</span>)
             }
             <span class="ident">ErrorCode</span>::<span class="ident">InvalidBoolByte</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid boolean byte&quot;</span>),
         }
