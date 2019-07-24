@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Root",""]]});
+initSidebarItems({"struct":[["Root","Pair root name and NBT value together, used in parameters for convenience of `From` and `Into`."]]});

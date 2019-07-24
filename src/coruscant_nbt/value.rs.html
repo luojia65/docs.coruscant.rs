@@ -48,6 +48,9 @@
 <span id="48">48</span>
 <span id="49">49</span>
 <span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">mod</span> <span class="ident">ser</span>;
 
@@ -55,6 +58,7 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">map</span>::<span class="ident">Map</span>;
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
 
+<span class="doccomment">/// Represents any valid NBT value.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Value</span> {
     <span class="ident">Byte</span>(<span class="ident">i8</span>),
@@ -93,6 +97,8 @@
 <span class="comment">// impl Default for Value {}</span>
 <span class="comment">// NBT does not have an null value</span>
 
+<span class="doccomment">/// Convert a T into `coruscant_nbt::Value` which is an enum that can represent</span>
+<span class="doccomment">/// any valid NBT data.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_value</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">value</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">serde</span>::<span class="ident">Serialize</span>,

@@ -318,12 +318,68 @@
 <span id="318">318</span>
 <span id="319">319</span>
 <span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="doccomment">//! Deserialize NBT data to a Rust data structure.</span>
+
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">consts</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">read</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>)]</span>
@@ -333,6 +389,7 @@
 
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">forward_to_deserialize_any</span>;
 
+<span class="doccomment">/// Deserialize an instance of type `T` from an IO stream of NBT. </span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
@@ -340,8 +397,9 @@
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
-} 
+}
 
+<span class="doccomment">/// Deserialize an instance of type `T` from a GZip compressed IO stream of NBT. </span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_gzip_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -351,8 +409,9 @@
     <span class="kw">let</span> <span class="ident">read</span> <span class="op">=</span> <span class="ident">GzDecoder</span>::<span class="ident">new</span>(<span class="ident">read</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
-} 
+}
 
+<span class="doccomment">/// Deserialize an instance of type `T` from a Zlib compressed IO stream of NBT. </span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;zlib&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_zlib_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -362,16 +421,18 @@
     <span class="kw">let</span> <span class="ident">read</span> <span class="op">=</span> <span class="ident">ZlibDecoder</span>::<span class="ident">new</span>(<span class="ident">read</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
-} 
+}
 
+<span class="doccomment">/// Deserialize an instance of type `T` from an NBT byte slice. </span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">slice</span>(<span class="ident">slice</span>);
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
-} 
+}
 
+<span class="doccomment">/// A struct that deserializes NBT into Rust values.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
     <span class="ident">read</span>: <span class="ident">R</span>,
 }
@@ -380,20 +441,28 @@
 <span class="kw">where</span>
     <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
 {
+    <span class="doccomment">/// Create a NBT deserializer from an `io::Read`. </span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">io</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="ident">Deserializer</span> { <span class="ident">read</span>: <span class="ident">read</span>::<span class="ident">IoRead</span>::<span class="ident">new</span>(<span class="ident">read</span>) }
+        <span class="ident">Deserializer</span> {
+            <span class="ident">read</span>: <span class="ident">read</span>::<span class="ident">IoRead</span>::<span class="ident">new</span>(<span class="ident">read</span>),
+        }
     }
 
+    <span class="doccomment">/// Unwrap `io::Read` from the NBT deserializer.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">R</span> {
         <span class="self">self</span>.<span class="ident">read</span>.<span class="ident">into_inner</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">read</span>::<span class="ident">SliceRead</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span>{
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">read</span>::<span class="ident">SliceRead</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;&gt;</span> {
+    <span class="doccomment">/// Create a NBT deserializer from a `&amp;[u8]`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">slice</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="ident">Deserializer</span> { <span class="ident">read</span>: <span class="ident">read</span>::<span class="ident">SliceRead</span>::<span class="ident">new</span>(<span class="ident">slice</span>) }
+        <span class="ident">Deserializer</span> {
+            <span class="ident">read</span>: <span class="ident">read</span>::<span class="ident">SliceRead</span>::<span class="ident">new</span>(<span class="ident">slice</span>),
+        }
     }
 
+    <span class="doccomment">/// Unwrap `&amp;[u8]` from the NBT deserializer.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>] {
         <span class="self">self</span>.<span class="ident">read</span>.<span class="ident">into_inner</span>()
     }
@@ -431,19 +500,22 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">CompoundAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">type_id</span>: <span class="prelude-val">None</span>, <span class="ident">outer</span> }
+        <span class="self">Self</span> {
+            <span class="ident">type_id</span>: <span class="prelude-val">None</span>,
+            <span class="ident">outer</span>,
+        }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">de</span>::<span class="ident">MapAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompoundAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">de</span>::<span class="ident">MapAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompoundAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
     <span class="kw">fn</span> <span class="ident">next_key_seed</span><span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seed</span>: <span class="ident">K</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">K</span>::<span class="ident">Value</span><span class="op">&gt;&gt;</span>
-    <span class="kw">where</span> 
-        <span class="ident">K</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">K</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_type_id</span>()<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">type_id</span> <span class="op">==</span> <span class="ident">consts</span>::<span class="ident">TYPE_ID_END</span> {
@@ -455,16 +527,16 @@
     }
 
     <span class="kw">fn</span> <span class="ident">next_value_seed</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seed</span>: <span class="ident">V</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span>
-    <span class="kw">where</span> 
-        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">type_id</span> {
             <span class="prelude-val">Some</span>(<span class="ident">type_id</span>) <span class="op">=&gt;</span> <span class="ident">type_id</span>,
-            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;call next_value_seed before next_key_seed&quot;</span>)
+            <span class="prelude-val">None</span> <span class="op">=&gt;</span> <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;call next_value_seed before next_key_seed&quot;</span>),
         };
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="ident">InnerDeserializer</span> { 
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="ident">InnerDeserializer</span> {
             <span class="ident">outer</span>: <span class="self">self</span>.<span class="ident">outer</span>,
-            <span class="ident">type_id</span>
+            <span class="ident">type_id</span>,
         })<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">value</span>)
     }
@@ -477,48 +549,68 @@
     <span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">ListOrArrayAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">ListOrArrayAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
 {
     <span class="kw">fn</span> <span class="ident">list</span>(<span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_type_id</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">total_len</span> <span class="op">=</span> <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_length</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> { <span class="ident">type_id</span>, <span class="ident">cur_len</span>: <span class="number">0</span>, <span class="ident">total_len</span>, <span class="ident">outer</span> })
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+            <span class="ident">type_id</span>,
+            <span class="ident">cur_len</span>: <span class="number">0</span>,
+            <span class="ident">total_len</span>,
+            <span class="ident">outer</span>,
+        })
     }
 
     <span class="kw">fn</span> <span class="ident">byte_array</span>(<span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">total_len</span> <span class="op">=</span> <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_length</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> { <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_BYTE</span>, <span class="ident">cur_len</span>: <span class="number">0</span>, <span class="ident">total_len</span>, <span class="ident">outer</span> })
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+            <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_BYTE</span>,
+            <span class="ident">cur_len</span>: <span class="number">0</span>,
+            <span class="ident">total_len</span>,
+            <span class="ident">outer</span>,
+        })
     }
 
     <span class="kw">fn</span> <span class="ident">int_array</span>(<span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">total_len</span> <span class="op">=</span> <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_length</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> { <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_INT</span>, <span class="ident">cur_len</span>: <span class="number">0</span>, <span class="ident">total_len</span>, <span class="ident">outer</span> })
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+            <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_INT</span>,
+            <span class="ident">cur_len</span>: <span class="number">0</span>,
+            <span class="ident">total_len</span>,
+            <span class="ident">outer</span>,
+        })
     }
 
     <span class="kw">fn</span> <span class="ident">long_array</span>(<span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">total_len</span> <span class="op">=</span> <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_length</span>()<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> { <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_LONG</span>, <span class="ident">cur_len</span>: <span class="number">0</span>, <span class="ident">total_len</span>, <span class="ident">outer</span> })
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
+            <span class="ident">type_id</span>: <span class="ident">consts</span>::<span class="ident">TYPE_ID_LONG</span>,
+            <span class="ident">cur_len</span>: <span class="number">0</span>,
+            <span class="ident">total_len</span>,
+            <span class="ident">outer</span>,
+        })
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">de</span>::<span class="ident">SeqAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListOrArrayAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span> <span class="ident">de</span>::<span class="ident">SeqAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListOrArrayAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+    <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
 {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">Error</span>;
 
     <span class="kw">fn</span> <span class="ident">next_element_seed</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">seed</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span>::<span class="ident">Value</span><span class="op">&gt;&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> 
+        <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeSeed</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">cur_len</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">total_len</span> {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>);
         }
         <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">seed</span>.<span class="ident">deserialize</span>(<span class="ident">InnerDeserializer</span> {
             <span class="ident">outer</span>: <span class="self">self</span>.<span class="ident">outer</span>,
-            <span class="ident">type_id</span>: <span class="self">self</span>.<span class="ident">type_id</span>
+            <span class="ident">type_id</span>: <span class="self">self</span>.<span class="ident">type_id</span>,
         })<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">cur_len</span> <span class="op">+=</span> <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">value</span>))
@@ -568,7 +660,7 @@
     <span class="kw">fn</span> <span class="ident">deserialize_any</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">visitor</span>: <span class="ident">V</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
-    {   
+    {
         <span class="ident">proc_deserialize_value</span>(<span class="ident">visitor</span>, <span class="self">self</span>.<span class="ident">type_id</span>, <span class="self">self</span>.<span class="ident">outer</span>)
     }
 
@@ -577,7 +669,11 @@
         <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">type_id</span> <span class="op">!=</span> <span class="ident">consts</span>::<span class="ident">TYPE_ID_BYTE</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(<span class="self">self</span>.<span class="ident">type_id</span>, <span class="ident">consts</span>::<span class="ident">TYPE_ID_BYTE</span>, <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>()))
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(
+                <span class="self">self</span>.<span class="ident">type_id</span>,
+                <span class="ident">consts</span>::<span class="ident">TYPE_ID_BYTE</span>,
+                <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>(),
+            ));
         }
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_byte_inner</span>()<span class="question-mark">?</span> {
             <span class="number">1</span> <span class="op">=&gt;</span> <span class="ident">visitor</span>.<span class="ident">visit_bool</span>(<span class="bool-val">true</span>),
@@ -588,10 +684,14 @@
 
     <span class="kw">fn</span> <span class="ident">deserialize_str</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">visitor</span>: <span class="ident">V</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">type_id</span> <span class="op">!=</span> <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(<span class="self">self</span>.<span class="ident">type_id</span>, <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span>, <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>()))
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(
+                <span class="self">self</span>.<span class="ident">type_id</span>,
+                <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span>,
+                <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>(),
+            ));
         }
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_string_inner</span>()<span class="question-mark">?</span> {
             <span class="ident">Cow</span>::<span class="ident">Borrowed</span>(<span class="ident">borrowed</span>) <span class="op">=&gt;</span> <span class="ident">visitor</span>.<span class="ident">visit_borrowed_str</span>(<span class="ident">borrowed</span>),
@@ -601,10 +701,14 @@
 
     <span class="kw">fn</span> <span class="ident">deserialize_string</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">visitor</span>: <span class="ident">V</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
+        <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">type_id</span> <span class="op">!=</span> <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(<span class="self">self</span>.<span class="ident">type_id</span>, <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span>, <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>()))
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(
+                <span class="self">self</span>.<span class="ident">type_id</span>,
+                <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span>,
+                <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>(),
+            ));
         }
         <span class="kw">let</span> <span class="ident">owned</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">read_string_inner</span>()<span class="question-mark">?</span>.<span class="ident">into_owned</span>();
         <span class="ident">visitor</span>.<span class="ident">visit_string</span>(<span class="ident">owned</span>)
@@ -618,8 +722,12 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>]</span>
-<span class="kw">fn</span> <span class="ident">proc_deserialize_value</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">V</span><span class="op">&gt;</span>(<span class="ident">visitor</span>: <span class="ident">V</span>, <span class="ident">type_id</span>: <span class="ident">u8</span>, <span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span> 
-<span class="kw">where</span> 
+<span class="kw">fn</span> <span class="ident">proc_deserialize_value</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="lifetime">&#39;a</span>, <span class="ident">R</span>, <span class="ident">V</span><span class="op">&gt;</span>(
+    <span class="ident">visitor</span>: <span class="ident">V</span>,
+    <span class="ident">type_id</span>: <span class="ident">u8</span>,
+    <span class="ident">outer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
+) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">V</span>::<span class="ident">Value</span><span class="op">&gt;</span>
+<span class="kw">where</span>
     <span class="ident">R</span>: <span class="ident">read</span>::<span class="ident">Read</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
     <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
 {
@@ -636,8 +744,8 @@
         <span class="ident">consts</span>::<span class="ident">TYPE_ID_COMPOUND</span> <span class="op">=&gt;</span> <span class="ident">visitor</span>.<span class="ident">visit_map</span>(<span class="ident">CompoundAccess</span>::<span class="ident">new</span>(<span class="ident">outer</span>)),
         <span class="ident">consts</span>::<span class="ident">TYPE_ID_INT_ARRAY</span> <span class="op">=&gt;</span> <span class="ident">visitor</span>.<span class="ident">visit_seq</span>(<span class="ident">ListOrArrayAccess</span>::<span class="ident">int_array</span>(<span class="ident">outer</span>)<span class="question-mark">?</span>),
         <span class="ident">consts</span>::<span class="ident">TYPE_ID_LONG_ARRAY</span> <span class="op">=&gt;</span> <span class="ident">visitor</span>.<span class="ident">visit_seq</span>(<span class="ident">ListOrArrayAccess</span>::<span class="ident">long_array</span>(<span class="ident">outer</span>)<span class="question-mark">?</span>),
-        <span class="ident">invalid</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">invalid_id_at</span>(<span class="ident">invalid</span>, <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>()))
+        <span class="ident">invalid</span> <span class="op">=&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">invalid_id_at</span>(<span class="ident">invalid</span>, <span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>())),
     }
-} 
+}
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p></div></div></aside><script>window.rootPath = "../../";window.currentCrate = "coruscant_nbt";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>

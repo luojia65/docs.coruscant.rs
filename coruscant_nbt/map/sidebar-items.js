@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Iter",""],["Map",""]]});
+initSidebarItems({"struct":[["Iter",""],["Map","Represents a NBT key/value type."]]});

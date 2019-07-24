@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Error",""]],"type":[["Result",""]]});
+initSidebarItems({"struct":[["Error","This type represents all possible errors that can occur when serializing or deserializing NBT data."]],"type":[["Result","Alias for a `Result` with the error type `coruscant_nbt::Error`."]]});

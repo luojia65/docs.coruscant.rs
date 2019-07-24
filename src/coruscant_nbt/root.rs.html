@@ -17,7 +17,15 @@
 <span id="17">17</span>
 <span id="18">18</span>
 <span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
 </pre><div class="example-wrap"><pre class="rust ">
+<span class="doccomment">//! Key-Value pair of NBT data and its root name.</span>
+
+<span class="doccomment">/// Pair root name and NBT value together, used in parameters for convenience</span>
+<span class="doccomment">/// of `From` and `Into`.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Root</span><span class="op">&lt;</span><span class="lifetime">&#39;k</span>, <span class="lifetime">&#39;v</span>, <span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="ident">root_name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;k</span> <span class="ident">str</span>,
     <span class="kw">pub</span> <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;v</span> <span class="ident">T</span>,

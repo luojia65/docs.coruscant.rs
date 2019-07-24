@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Value",""]],"fn":[["to_value",""]]});
+initSidebarItems({"enum":[["Value","Represents any valid NBT value."]],"fn":[["to_value","Convert a T into `coruscant_nbt::Value` which is an enum that can represent any valid NBT data."]]});
