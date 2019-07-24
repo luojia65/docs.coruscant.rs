@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["from_reader",""],["from_slice",""]],"struct":[["Deserializer",""]]});
+initSidebarItems({"fn":[["from_gzip_reader",""],["from_reader",""],["from_slice",""],["from_zlib_reader",""]],"struct":[["Deserializer",""]]});

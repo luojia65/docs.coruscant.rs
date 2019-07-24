@@ -300,34 +300,34 @@
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">ErrorCode</span>::<span class="ident">Message</span>(<span class="kw-2">ref</span> <span class="ident">msg</span>) <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="ident">msg</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">Io</span>(<span class="kw-2">ref</span> <span class="ident">err</span>) <span class="op">=&gt;</span> <span class="ident">fmt</span>::<span class="ident">Display</span>::<span class="ident">fmt</span>(<span class="ident">err</span>, <span class="ident">f</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported nbt type&quot;</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedListInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported list-wrapped type&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported NBT type&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedListInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported NBT list-wrapped type&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedArrayType</span> <span class="op">=&gt;</span> {
-                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported type for arrays; a sequence is required&quot;</span>)
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported type for NBT arrays; a sequence is required&quot;</span>)
             }
-            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedArrayInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported array inner type&quot;</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">InvalidStringLength</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid string length&quot;</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">KeyMustBeAString</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;key must be a string&quot;</span>),
-            <span class="ident">ErrorCode</span>::<span class="ident">SequenceSizeUnknown</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;size of sequence is unknown&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">UnsupportedArrayInnerType</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unsupported NBT array inner type&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">InvalidStringLength</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid NBT string length&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">KeyMustBeAString</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;NBT key must be a string&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">SequenceSizeUnknown</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;size of NBT sequence is unknown&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">ListDifferentType</span> <span class="op">=&gt;</span> {
-                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one list do not have the same type&quot;</span>)
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one NBT list do not have the same type&quot;</span>)
             }
             <span class="ident">ErrorCode</span>::<span class="ident">ArrayDifferentType</span> <span class="op">=&gt;</span> {
-                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one array do not have the same type&quot;</span>)
+                <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one NBT array do not have the same type&quot;</span>)
             }
             <span class="ident">ErrorCode</span>::<span class="ident">InvalidBoolByte</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
-                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid boolean byte {} (0x{:02X}), 0 or 1 expected&quot;</span>
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid NBT boolean byte {} (0x{:02X}), 0 or 1 expected&quot;</span>
                     , <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
-            <span class="ident">ErrorCode</span>::<span class="ident">InvalidUtf8String</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid utf-8 string&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">InvalidUtf8String</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid utf-8 NBT string&quot;</span>),
             <span class="ident">ErrorCode</span>::<span class="ident">TypeIdMismatch</span>(<span class="ident">invalid</span>, <span class="ident">expected</span>) <span class="op">=&gt;</span> 
-                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;mismatched type id {} (0x{:02X}), expected {} (0x{:02X})&quot;</span>
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;mismatched NBT type id {} (0x{:02X}), expected {} (0x{:02X})&quot;</span>
                     , <span class="ident">invalid</span>, <span class="ident">invalid</span>, <span class="ident">expected</span>, <span class="ident">expected</span>)),
             <span class="ident">ErrorCode</span>::<span class="ident">TypeIdInvalid</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
                 <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid type id {} (0x{:02X})&quot;</span>, <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
             <span class="ident">ErrorCode</span>::<span class="ident">InvalidLength</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
                 <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid length {} (0x{:04X}); length must be positive for NBT&quot;</span>
                     , <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
-            <span class="ident">ErrorCode</span>::<span class="ident">SliceUnexpectedEof</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unexpected EOF when reading source slice&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">SliceUnexpectedEof</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unexpected EOF when reading NBT source slice&quot;</span>),
         }
     }
 }

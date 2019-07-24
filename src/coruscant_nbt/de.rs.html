@@ -292,6 +292,32 @@
 <span id="292">292</span>
 <span id="293">293</span>
 <span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">consts</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
@@ -300,6 +326,11 @@
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">de</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">flate2</span>::<span class="ident">read</span>::<span class="ident">GzDecoder</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;zlib&quot;</span>)]</span>
+<span class="kw">use</span> <span class="ident">flate2</span>::<span class="ident">read</span>::<span class="ident">ZlibDecoder</span>;
+
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">forward_to_deserialize_any</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
@@ -307,6 +338,28 @@
     <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
     <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeOwned</span>,
 {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
+    <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
+} 
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_gzip_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
+    <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeOwned</span>,
+{
+    <span class="kw">let</span> <span class="ident">read</span> <span class="op">=</span> <span class="ident">GzDecoder</span>::<span class="ident">new</span>(<span class="ident">read</span>);
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
+    <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
+} 
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;zlib&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_zlib_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
+    <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">DeserializeOwned</span>,
+{
+    <span class="kw">let</span> <span class="ident">read</span> <span class="op">=</span> <span class="ident">ZlibDecoder</span>::<span class="ident">new</span>(<span class="ident">read</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">de</span> <span class="op">=</span> <span class="ident">Deserializer</span>::<span class="ident">io</span>(<span class="ident">read</span>);
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
 } 
@@ -537,7 +590,6 @@
     <span class="kw">where</span>
         <span class="ident">V</span>: <span class="ident">de</span>::<span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>
     {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;str!&quot;</span>);
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">type_id</span> <span class="op">!=</span> <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error</span>::<span class="ident">mismatch_at</span>(<span class="self">self</span>.<span class="ident">type_id</span>, <span class="ident">consts</span>::<span class="ident">TYPE_ID_STRING</span>, <span class="self">self</span>.<span class="ident">outer</span>.<span class="ident">read</span>.<span class="ident">index</span>()))
         }
