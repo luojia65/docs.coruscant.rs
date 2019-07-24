@@ -124,6 +124,58 @@
 <span id="124">124</span>
 <span id="125">125</span>
 <span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
@@ -154,7 +206,12 @@
     <span class="ident">SequenceSizeUnknown</span>,
     <span class="ident">ListDifferentType</span>,
     <span class="ident">ArrayDifferentType</span>,
-    <span class="ident">InvalidBoolByte</span>,
+    <span class="ident">InvalidBoolByte</span>(<span class="ident">i8</span>),
+    <span class="ident">InvalidUtf8String</span>,
+    <span class="ident">TypeIdMismatch</span>(<span class="ident">u8</span>, <span class="ident">u8</span>),
+    <span class="ident">TypeIdInvalid</span>(<span class="ident">u8</span>),
+    <span class="ident">InvalidLength</span>(<span class="ident">i16</span>),
+    <span class="ident">SliceUnexpectedEof</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Error</span> {
@@ -164,6 +221,41 @@
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">io</span>(<span class="ident">error</span>: <span class="ident">io</span>::<span class="ident">Error</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">Io</span>(<span class="ident">error</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="number">0</span>)
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">io_at</span>(<span class="ident">error</span>: <span class="ident">io</span>::<span class="ident">Error</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">Io</span>(<span class="ident">error</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">utf8_at</span>(<span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">InvalidUtf8String</span>;
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">mismatch_at</span>(<span class="ident">mismatch</span>: <span class="ident">u8</span>, <span class="ident">expected</span>: <span class="ident">u8</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">TypeIdMismatch</span>(<span class="ident">mismatch</span>, <span class="ident">expected</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+    
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">invalid_id_at</span>(<span class="ident">invalid_id</span>: <span class="ident">u8</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">TypeIdInvalid</span>(<span class="ident">invalid_id</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+    
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">bool_at</span>(<span class="ident">invalid</span>: <span class="ident">i8</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">InvalidBoolByte</span>(<span class="ident">invalid</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">invalid_len_at</span>(<span class="ident">invalid</span>: <span class="ident">i16</span>, <span class="ident">index</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">InvalidLength</span>(<span class="ident">invalid</span>);
+        <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="ident">index</span>)
+    }
+
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">slice_eof</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="ident">ErrorCode</span>::<span class="ident">SliceUnexpectedEof</span>;
         <span class="self">Self</span>::<span class="ident">from_inner</span>(<span class="ident">code</span>, <span class="number">0</span>)
     }
 
@@ -181,7 +273,7 @@
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">index</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="ident">fmt</span>::<span class="ident">Display</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">err</span>.<span class="ident">code</span>, <span class="ident">f</span>)
         } <span class="kw">else</span> {
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{} at index {}&quot;</span>, <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">code</span>, <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">index</span>)
+            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;(NBT input:{}) {}&quot;</span>, <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">index</span>, <span class="self">self</span>.<span class="ident">err</span>.<span class="ident">code</span>)
         }
     }
 }
@@ -198,7 +290,7 @@
             <span class="ident">fmt</span>::<span class="ident">Display</span>::<span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">code</span>, <span class="ident">f</span>)
         } <span class="kw">else</span> {
             <span class="comment">// todo: improve message format</span>
-            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{} at index {}&quot;</span>, <span class="self">self</span>.<span class="ident">code</span>, <span class="self">self</span>.<span class="ident">index</span>)
+            <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;(NBT input:{}) {}&quot;</span>, <span class="self">self</span>.<span class="ident">index</span>, <span class="self">self</span>.<span class="ident">code</span>)
         }
     }
 }
@@ -223,7 +315,19 @@
             <span class="ident">ErrorCode</span>::<span class="ident">ArrayDifferentType</span> <span class="op">=&gt;</span> {
                 <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;elements of one array do not have the same type&quot;</span>)
             }
-            <span class="ident">ErrorCode</span>::<span class="ident">InvalidBoolByte</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid boolean byte&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">InvalidBoolByte</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid boolean byte {} (0x{:02X}), 0 or 1 expected&quot;</span>
+                    , <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
+            <span class="ident">ErrorCode</span>::<span class="ident">InvalidUtf8String</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;invalid utf-8 string&quot;</span>),
+            <span class="ident">ErrorCode</span>::<span class="ident">TypeIdMismatch</span>(<span class="ident">invalid</span>, <span class="ident">expected</span>) <span class="op">=&gt;</span> 
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;mismatched type id {} (0x{:02X}), expected {} (0x{:02X})&quot;</span>
+                    , <span class="ident">invalid</span>, <span class="ident">invalid</span>, <span class="ident">expected</span>, <span class="ident">expected</span>)),
+            <span class="ident">ErrorCode</span>::<span class="ident">TypeIdInvalid</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid type id {} (0x{:02X})&quot;</span>, <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
+            <span class="ident">ErrorCode</span>::<span class="ident">InvalidLength</span>(<span class="ident">invalid</span>) <span class="op">=&gt;</span> 
+                <span class="ident">f</span>.<span class="ident">write_fmt</span>(<span class="macro">format_args</span><span class="macro">!</span>(<span class="string">&quot;invalid length {} (0x{:04X}); length must be positive for NBT&quot;</span>
+                    , <span class="ident">invalid</span>, <span class="ident">invalid</span>)),
+            <span class="ident">ErrorCode</span>::<span class="ident">SliceUnexpectedEof</span> <span class="op">=&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="string">&quot;unexpected EOF when reading source slice&quot;</span>),
         }
     }
 }

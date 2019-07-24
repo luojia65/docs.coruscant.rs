@@ -1859,6 +1859,33 @@
 <span id="1859">1859</span>
 <span id="1860">1860</span>
 <span id="1861">1861</span>
+<span id="1862">1862</span>
+<span id="1863">1863</span>
+<span id="1864">1864</span>
+<span id="1865">1865</span>
+<span id="1866">1866</span>
+<span id="1867">1867</span>
+<span id="1868">1868</span>
+<span id="1869">1869</span>
+<span id="1870">1870</span>
+<span id="1871">1871</span>
+<span id="1872">1872</span>
+<span id="1873">1873</span>
+<span id="1874">1874</span>
+<span id="1875">1875</span>
+<span id="1876">1876</span>
+<span id="1877">1877</span>
+<span id="1878">1878</span>
+<span id="1879">1879</span>
+<span id="1880">1880</span>
+<span id="1881">1881</span>
+<span id="1882">1882</span>
+<span id="1883">1883</span>
+<span id="1884">1884</span>
+<span id="1885">1885</span>
+<span id="1886">1886</span>
+<span id="1887">1887</span>
+<span id="1888">1888</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>;
 
@@ -3456,7 +3483,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Byte &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Byte &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3473,7 +3503,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Short &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Short &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3490,7 +3523,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Int &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Int &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3507,7 +3543,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Long &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Long &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3524,7 +3563,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Float &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Float &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3541,7 +3583,10 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">name_len</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Double &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;Double &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">value</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3560,7 +3605,10 @@
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">name_bytes</span>);
         <span class="kw">let</span> <span class="ident">string</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">from_utf8_lossy</span>(<span class="ident">string_bytes</span>);
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;String &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">string</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;String &#39;{}&#39; {}&quot;</span>, <span class="ident">name</span>, <span class="ident">string</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3589,7 +3637,10 @@
     {
         <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">-=</span> <span class="number">1</span>;
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;EndList&quot;</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;EndList&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -3626,7 +3677,10 @@
     {
         <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">-=</span> <span class="number">1</span>;
         <span class="ident">indent</span>(<span class="ident">w</span>, <span class="self">self</span>.<span class="ident">current_indent</span>, <span class="self">self</span>.<span class="ident">indent</span>)<span class="question-mark">?</span>;
-        <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;EndArray&quot;</span>)<span class="question-mark">?</span>;
+        <span class="macro">write</span><span class="macro">!</span>(<span class="ident">w</span>, <span class="string">&quot;EndArray&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">current_indent</span> <span class="op">!=</span> <span class="number">0</span> {
+            <span class="macro">writeln</span><span class="macro">!</span>(<span class="ident">w</span>)<span class="question-mark">?</span>;
+        }
         <span class="prelude-val">Ok</span>(())
     }
 

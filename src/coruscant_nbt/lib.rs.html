@@ -33,6 +33,9 @@
 <span id="33">33</span>
 <span id="34">34</span>
 <span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;zlib&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">flate2</span>::<span class="ident">Compression</span>;
@@ -52,17 +55,20 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ser</span>::{<span class="ident">to_string_transcript</span>, <span class="ident">to_vec</span>, <span class="ident">to_writer</span>, <span class="ident">Serializer</span>};
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">de</span>::<span class="ident">from_reader</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">de</span>::{<span class="ident">from_reader</span>, <span class="ident">from_slice</span>, <span class="ident">Deserializer</span>};
 
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">value</span>::{<span class="ident">to_value</span>, <span class="ident">Value</span>};
+
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">map</span>::<span class="ident">Map</span>;
 
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">mod</span> <span class="ident">macros</span>;
 <span class="kw">mod</span> <span class="ident">consts</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">de</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">error</span>;
-<span class="kw">mod</span> <span class="ident">map</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">map</span>;
 <span class="kw">mod</span> <span class="ident">read</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">root</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ser</span>;
