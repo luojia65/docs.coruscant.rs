@@ -389,7 +389,7 @@
 
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">forward_to_deserialize_any</span>;
 
-<span class="doccomment">/// Deserialize an instance of type `T` from an IO stream of NBT. </span>
+<span class="doccomment">/// Deserialize an instance of type `T` from an IO stream of NBT.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
@@ -399,7 +399,7 @@
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
 }
 
-<span class="doccomment">/// Deserialize an instance of type `T` from a GZip compressed IO stream of NBT. </span>
+<span class="doccomment">/// Deserialize an instance of type `T` from a GZip compressed IO stream of NBT.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gzip&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_gzip_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -411,7 +411,7 @@
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
 }
 
-<span class="doccomment">/// Deserialize an instance of type `T` from a Zlib compressed IO stream of NBT. </span>
+<span class="doccomment">/// Deserialize an instance of type `T` from a Zlib compressed IO stream of NBT.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;zlib&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_zlib_reader</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -423,7 +423,7 @@
     <span class="ident">T</span>::<span class="ident">deserialize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">de</span>)
 }
 
-<span class="doccomment">/// Deserialize an instance of type `T` from an NBT byte slice. </span>
+<span class="doccomment">/// Deserialize an instance of type `T` from an NBT byte slice.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">de</span>::<span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
@@ -441,7 +441,7 @@
 <span class="kw">where</span>
     <span class="ident">R</span>: <span class="ident">io</span>::<span class="ident">Read</span>,
 {
-    <span class="doccomment">/// Create a NBT deserializer from an `io::Read`. </span>
+    <span class="doccomment">/// Create a NBT deserializer from an `io::Read`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">io</span>(<span class="ident">read</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="ident">Deserializer</span> {
             <span class="ident">read</span>: <span class="ident">read</span>::<span class="ident">IoRead</span>::<span class="ident">new</span>(<span class="ident">read</span>),

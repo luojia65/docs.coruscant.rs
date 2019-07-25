@@ -66,49 +66,49 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Mark that a field should be serialized as an NBT array instread of a list of</span>
 <span class="doccomment">//! elements.</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! You may use this module by adding `#[serde(with = &quot;as_nbt_array&quot;)]` onto fields</span>
 <span class="doccomment">//! that need to be serialized into arrays, for example ByteArray instead of a ListTag</span>
 <span class="doccomment">//! of bytes. By adding it onto a serde sequence of `i8`, `i32` or `i64`, the serializer</span>
 <span class="doccomment">//! guarantees to procceed them into ByteArray, IntArray or LongArray.</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # Example </span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Example</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//! use coruscant_nbt::as_nbt_array;</span>
 <span class="doccomment">//! use serde::Serialize;</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! #[derive(Serialize)]</span>
 <span class="doccomment">//! struct Wrap&lt;&#39;a&gt; {</span>
 <span class="doccomment">//!     list_of_bytes: &amp;&#39;a [i8], // no attribute =&gt; ListTag of bytes</span>
-<span class="doccomment">//!     #[serde(with = &quot;as_nbt_array&quot;)] </span>
+<span class="doccomment">//!     #[serde(with = &quot;as_nbt_array&quot;)]</span>
 <span class="doccomment">//!     byte_array: &amp;&#39;a [i8], // with special attribute =&gt; ByteArray</span>
 <span class="doccomment">//! }</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     let bytes = &amp;[-1, 2, -3];</span>
 <span class="doccomment">//!     let data = Wrap {</span>
 <span class="doccomment">//!         list_of_bytes: bytes,</span>
 <span class="doccomment">//!         byte_array: bytes,</span>
 <span class="doccomment">//!     };</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//!     // You may also use other to-functions. For human readability, this example</span>
 <span class="doccomment">//!     // prints informal NBT transctiption for reference.</span>
 <span class="doccomment">//!     let out = coruscant_nbt::to_string_transcript(&amp;data)</span>
 <span class="doccomment">//!             .expect(&quot;generate string transcript&quot;);</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//!     // Should firstly print a ListTag of bytes, and secondly a special ByteArray.</span>
 <span class="doccomment">//!     // IntArray and LongArray are also supported.</span>
 <span class="doccomment">//!     println!(&quot;{}&quot;, out);</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! # Notes</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! Although this module seems empty in docs, it actually consists of a doc hidden</span>
 <span class="doccomment">//! `serialize` method and a special wrapper struct. This enables serde to serialize</span>
-<span class="doccomment">//! marked fields using this method, in which your field are wrapped by the struct </span>
-<span class="doccomment">//! and procceeded differently in `coruscant::Serializer`, resulting in switching </span>
+<span class="doccomment">//! marked fields using this method, in which your field are wrapped by the struct</span>
+<span class="doccomment">//! and procceeded differently in `coruscant::Serializer`, resulting in switching</span>
 <span class="doccomment">//! lists into arrays.</span>
 
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">Serialize</span>;

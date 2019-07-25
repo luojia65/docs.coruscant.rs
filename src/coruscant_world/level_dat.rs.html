@@ -306,13 +306,13 @@
 <span id="306">306</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Level format parsed as serde favored Rust structs.</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! Ref: https://minecraft.gamepedia.com/Level_format</span>
 
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>};
+<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 
-<span class="doccomment">/// Root repersentation of `level.dat` file. </span>
+<span class="doccomment">/// Root repersentation of `level.dat` file.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LevelDat</span> {
@@ -321,66 +321,66 @@
     <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Data</span>,
 }
 
-<span class="doccomment">/// Container for all the level data. </span>
+<span class="doccomment">/// Container for all the level data.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Data</span> {
     <span class="doccomment">/// A ID/BossEvent collection of bossbars. ID of a bossbar is a string like</span>
     <span class="doccomment">/// `custom::boss`.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;CustomBossEvents&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">custom_boss_events</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">BossEvent</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Options for datapacks. </span>
+    <span class="doccomment">/// Options for datapacks.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DataPacks&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">data_packs</span>: <span class="ident">DataPacks</span>,
-    <span class="doccomment">/// This tag contains level data specific to certain dimensions. </span>
+    <span class="doccomment">/// This tag contains level data specific to certain dimensions.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DimensionData&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">dimension_data</span>: <span class="ident">DimensionData</span>,
     <span class="doccomment">/// The NBT version of the level, 19133.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;version&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">version_int</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// Normally true after a world has been initialized properly after creation. </span>
-    <span class="doccomment">/// If the initial simulation was canceled somehow, this can be false and the </span>
+    <span class="doccomment">/// Normally true after a world has been initialized properly after creation.</span>
+    <span class="doccomment">/// If the initial simulation was canceled somehow, this can be false and the</span>
     <span class="doccomment">/// world will be re-initialized on next load.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;initialized&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">initialized</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// The name of the level.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;LevelName&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">level_name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The name of the generator; &quot;default&quot;, &quot;flat&quot;, &quot;largeBiomes&quot;, &quot;amplified&quot;, &quot;buffet&quot;, </span>
-    <span class="doccomment">/// or &quot;debug_all_block_states&quot;. </span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">/// The name of the generator; &quot;default&quot;, &quot;flat&quot;, &quot;largeBiomes&quot;, &quot;amplified&quot;, &quot;buffet&quot;,</span>
+    <span class="doccomment">/// or &quot;debug_all_block_states&quot;.</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// Not case sensitive, but always written in the case here.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;generatorName&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">generator_name</span>: <span class="ident">String</span>,
     <span class="comment">// todo: generator version; generator settings</span>
     <span class="doccomment">/// The [random level seed] used to generate consistent terrain.</span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [random level seed]: https://minecraft.gamepedia.com/Seed_(level_generation)</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;RandomSeed&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">random_seed</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// True if the map generator should place structures such as villages, strongholds, </span>
+    <span class="doccomment">/// True if the map generator should place structures such as villages, strongholds,</span>
     <span class="doccomment">/// and mineshafts. Defaults to true. Always true if the world type is Customized.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;MapFeatures&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">map_features</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// The Unix time in milliseconds when the level was last loaded.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;LastPlayed&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">last_played</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// The estimated size in bytes of the level. Currently not modified or used by Minecraft, </span>
+    <span class="doccomment">/// The estimated size in bytes of the level. Currently not modified or used by Minecraft,</span>
     <span class="doccomment">/// but was previously.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;SizeOnDisk&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">size_on_disk</span>: <span class="ident">i64</span>,
     <span class="doccomment">/// True if cheats are enabled.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;allowCommands&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">allow_commands</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// True if the player will respawn in Spectator on death in singleplayer. </span>
+    <span class="doccomment">/// True if the player will respawn in Spectator on death in singleplayer.</span>
     <span class="doccomment">/// Affects all three game modes.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;hardcore&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">hardcore</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// An integer displaying the [data version].</span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [data version]: https://minecraft.gamepedia.com/Data_version</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DataVersion&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">data_version</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// The current difficulty setting. 0 is Peaceful, 1 is Easy, 2 is Normal, and 3 is Hard. </span>
+    <span class="doccomment">/// The current difficulty setting. 0 is Peaceful, 1 is Easy, 2 is Normal, and 3 is Hard.</span>
     <span class="doccomment">/// Defaults to 2.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Difficulty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">difficulty</span>: <span class="ident">i8</span>,
@@ -390,14 +390,14 @@
     <span class="doccomment">/// The number of ticks since the start of the level.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Time&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">time</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// The time of day. 0 is sunrise, 6000 is mid day, 12000 is sunset, 18000 is mid night, </span>
+    <span class="doccomment">/// The time of day. 0 is sunrise, 6000 is mid day, 12000 is sunset, 18000 is mid night,</span>
     <span class="doccomment">/// 24000 is the next day&#39;s 0. This value keeps counting past 24000 and does not reset to 0.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DayTime&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">day_time</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// The default game mode for the singleplayer player when they initially spawn. </span>
-    <span class="doccomment">/// 0 is Survival, 1 is Creative, 2 is Adventure, 3 is Spectator. </span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// Note: Singleplayer worlds do not use this field to save which game mode the player </span>
+    <span class="doccomment">/// The default game mode for the singleplayer player when they initially spawn.</span>
+    <span class="doccomment">/// 0 is Survival, 1 is Creative, 2 is Adventure, 3 is Spectator.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note: Singleplayer worlds do not use this field to save which game mode the player</span>
     <span class="doccomment">/// is currently in.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;GameType&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">game_type</span>: <span class="ident">i32</span>,
@@ -440,15 +440,15 @@
     <span class="doccomment">/// True if the level is currently experiencing rain, snow, and cloud cover.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;raining&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">raining</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The number of ticks before &quot;raining&quot; is toggled and this value gets set to </span>
+    <span class="doccomment">/// The number of ticks before &quot;raining&quot; is toggled and this value gets set to</span>
     <span class="doccomment">/// another random value.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;rainTime&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">rain_time</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// True if the rain/snow/cloud cover is a lightning storm and dark enough for mobs </span>
+    <span class="doccomment">/// True if the rain/snow/cloud cover is a lightning storm and dark enough for mobs</span>
     <span class="doccomment">/// to spawn under the sky.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;thundering&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">thundering</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The number of ticks before &quot;thundering&quot; is toggled and this value gets set to </span>
+    <span class="doccomment">/// The number of ticks before &quot;thundering&quot; is toggled and this value gets set to</span>
     <span class="doccomment">/// another random value.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;thunderTime&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">thunder_time</span>: <span class="ident">i32</span>,
@@ -456,22 +456,22 @@
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;clearWeatherTime&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">clear_weather_time</span>: <span class="ident">i32</span>,
     <span class="comment">// #[serde(rename = &quot;Player&quot;)]</span>
-    <span class="comment">// player: </span>
+    <span class="comment">// player:</span>
     <span class="comment">// #[serde(rename = &quot;GameRules&quot;)]</span>
-    <span class="comment">// game_rules: </span>
+    <span class="comment">// game_rules:</span>
     <span class="doccomment">/// The UUID of the current wandering trader in the world.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;WanderingTraderId&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">wandering_trader_id</span>: <span class="ident">String</span>,
     <span class="doccomment">/// The current chance of the wandering trader spawning next attempt.</span>
     <span class="doccomment">///  </span>
-    <span class="doccomment">/// This value is the percentage and will be divided by 10 when loaded by the game, </span>
+    <span class="doccomment">/// This value is the percentage and will be divided by 10 when loaded by the game,</span>
     <span class="doccomment">/// for example a value of 50 means 5.0% chance.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;WanderingTraderSpawnChance&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">wandering_trader_spawn_chance</span>: <span class="ident">i32</span>,
     <span class="doccomment">/// The amount of ticks until another wandering trader is attempted to spawn.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;WanderingTraderSpawnDelay&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">wandering_trader_spawn_delay</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// Information about the Minecraft version the world was saved in. </span>
+    <span class="doccomment">/// Information about the Minecraft version the world was saved in.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Version&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">Version</span>,
 }
@@ -479,13 +479,13 @@
 <span class="doccomment">/// Represents one single bossbar in `CustomBossEvents`.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BossEvent</span> {
-    <span class="doccomment">/// A list of players that may see this boss bar. </span>
+    <span class="doccomment">/// A list of players that may see this boss bar.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Players&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">players</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PlayerUuid</span><span class="op">&gt;</span>,
     <span class="doccomment">/// ID of the color of the bossbar. Also sets the color of the display text of the</span>
-    <span class="doccomment">/// bossbar, provided that the display text does not explicitly define a color for </span>
+    <span class="doccomment">/// bossbar, provided that the display text does not explicitly define a color for</span>
     <span class="doccomment">/// itself. See [color codes] for accepted values.</span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [color codes]: https://minecraft.gamepedia.com/Formatting_codes#Color_codes</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Color&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">color</span>: <span class="ident">String</span>,
@@ -502,11 +502,11 @@
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Value&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">cur_health</span>: <span class="ident">i32</span>,
     <span class="doccomment">/// The display name of the bossbar as a [JSON text component].</span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [JSON text component]: https://minecraft.gamepedia.com/Commands#Raw_JSON_text</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Name&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The ID of the overlay to be shown over the health bar. Accepted values are: </span>
+    <span class="doccomment">/// The ID of the overlay to be shown over the health bar. Accepted values are:</span>
     <span class="doccomment">/// `progress`, `notched_6`, `notched_10`, `notched_12`, and `notched_20`.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Overlay&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">overlay</span>: <span class="ident">String</span>,
@@ -521,11 +521,11 @@
 <span class="doccomment">/// Uuid of a single player.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PlayerUuid</span> {
-    <span class="doccomment">/// The least significant bits of the player&#39;s Universally Unique IDentifier. </span>
+    <span class="doccomment">/// The least significant bits of the player&#39;s Universally Unique IDentifier.</span>
     <span class="doccomment">/// This is joined with M to form the player&#39;s unique ID.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;L&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">least</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// The most significant bits of the player&#39;s Universally Unique IDentifier. </span>
+    <span class="doccomment">/// The most significant bits of the player&#39;s Universally Unique IDentifier.</span>
     <span class="doccomment">/// This is joined with L to form the player&#39;s unique ID.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;M&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">most</span>: <span class="ident">i64</span>,
@@ -534,51 +534,51 @@
 <span class="doccomment">/// Options for datapacks.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DataPacks</span> {
-    <span class="doccomment">/// List of disabled datapacks. </span>
+    <span class="doccomment">/// List of disabled datapacks.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Disabled&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">disabled</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// List of enabled datapacks. By default, this is populated with a single string &quot;vanilla&quot;. </span>
+    <span class="doccomment">/// List of enabled datapacks. By default, this is populated with a single string &quot;vanilla&quot;.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Enabled&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">enabled</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 }
 
-<span class="doccomment">/// Level data specific to certain dimensions. </span>
+<span class="doccomment">/// Level data specific to certain dimensions.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DimensionData</span> {
-    <span class="doccomment">/// Data for The End </span>
+    <span class="doccomment">/// Data for The End</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;1&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">the_end</span>: <span class="ident">EnderDimensionData</span>,
 }
 
-<span class="doccomment">/// Level data for The End </span>
+<span class="doccomment">/// Level data for The End</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EnderDimensionData</span> {
-    <span class="doccomment">/// Data for the ender dragon fight. Only appears after the end is entered. </span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">/// Data for the ender dragon fight. Only appears after the end is entered.</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// `None` for the end is not entered.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DragonFlight&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">dragon_flight</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">DragonFlight</span><span class="op">&gt;</span>,
 }
 
-<span class="doccomment">/// Data for the ender dragon fight. </span>
+<span class="doccomment">/// Data for the ender dragon fight.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DragonFlight</span> {
-    <span class="doccomment">/// Location of the End&#39;s exit portal that the ender dragon flies to upon it&#39;s death </span>
+    <span class="doccomment">/// Location of the End&#39;s exit portal that the ender dragon flies to upon it&#39;s death</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;ExitPortalLocation&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">exit_portal_location</span>: <span class="ident">ExitPortalLocation</span>,
-    <span class="doccomment">/// Contains a list of locations of the [End gateway portals] that haven&#39;t been spawned. </span>
-    <span class="doccomment">/// </span>
+    <span class="doccomment">/// Contains a list of locations of the [End gateway portals] that haven&#39;t been spawned.</span>
+    <span class="doccomment">///</span>
     <span class="doccomment">/// [End gateway portals]: https://minecraft.gamepedia.com/End_gateway_portal</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Gateways&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">gateways</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span>,
     <span class="doccomment">/// If the dragon is currently alive. // todo: true for alive?</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DragonKilled&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">dragon_killed</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// The least significant bits of the current Ender Dragon&#39;s Universally Unique IDentifier. </span>
+    <span class="doccomment">/// The least significant bits of the current Ender Dragon&#39;s Universally Unique IDentifier.</span>
     <span class="doccomment">/// This is joined with DragonUUIDMost to form the dragon&#39;s unique ID.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DragonUUIDLeast&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">dragon_uuid_least</span>: <span class="ident">i64</span>,
-    <span class="doccomment">/// The most significant bits of the current Ender Dragon&#39;s Universally Unique IDentifier. </span>
+    <span class="doccomment">/// The most significant bits of the current Ender Dragon&#39;s Universally Unique IDentifier.</span>
     <span class="doccomment">/// This is joined with DragonUUIDLeast to form the dragon&#39;s unique ID.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DragonUUIDMost&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">dragon_uuid_most</span>: <span class="ident">i64</span>,
@@ -587,7 +587,7 @@
     <span class="kw">pub</span> <span class="ident">previously_killed</span>: <span class="ident">bool</span>,
 }
 
-<span class="doccomment">/// Location of the End&#39;s exit portal that the ender dragon flies to upon it&#39;s death </span>
+<span class="doccomment">/// Location of the End&#39;s exit portal that the ender dragon flies to upon it&#39;s death</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExitPortalLocation</span> {
     <span class="doccomment">/// The X coordinate of the portal.</span>
@@ -601,7 +601,7 @@
     <span class="kw">pub</span> <span class="ident">z</span>: <span class="ident">i8</span>,
 }
 
-<span class="doccomment">/// Information about the Minecraft version the world was saved in. </span>
+<span class="doccomment">/// Information about the Minecraft version the world was saved in.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Version</span> {
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Id&quot;</span>)]</span>
