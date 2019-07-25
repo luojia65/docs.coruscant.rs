@@ -303,6 +303,7 @@
 <span id="303">303</span>
 <span id="304">304</span>
 <span id="305">305</span>
+<span id="306">306</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Level format parsed as serde favored Rust structs.</span>
 <span class="doccomment">//! </span>
@@ -315,6 +316,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LevelDat</span> {
+    <span class="doccomment">/// Contains all the level data.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Data&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Data</span>,
 }
