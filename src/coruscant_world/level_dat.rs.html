@@ -312,7 +312,7 @@
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 
-<span class="doccomment">/// Root tag of `level.dat` file. This tag should have an empty name.</span>
+<span class="doccomment">/// Root repersentation of `level.dat` file. </span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LevelDat</span> {
@@ -321,7 +321,7 @@
     <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Data</span>,
 }
 
-<span class="doccomment">/// This tag contains all the level data. </span>
+<span class="doccomment">/// Container for all the level data. </span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Data</span> {
     <span class="doccomment">/// A ID/BossEvent collection of bossbars. ID of a bossbar is a string like</span>
@@ -470,7 +470,7 @@
     <span class="kw">pub</span> <span class="ident">wandering_trader_spawn_chance</span>: <span class="ident">i32</span>,
     <span class="doccomment">/// The amount of ticks until another wandering trader is attempted to spawn.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;WanderingTraderSpawnDelay&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">wanding_trader_spawn_delay</span>: <span class="ident">i32</span>,
+    <span class="kw">pub</span> <span class="ident">wandering_trader_spawn_delay</span>: <span class="ident">i32</span>,
     <span class="doccomment">/// Information about the Minecraft version the world was saved in. </span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Version&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">Version</span>,
@@ -560,7 +560,7 @@
     <span class="kw">pub</span> <span class="ident">dragon_flight</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">DragonFlight</span><span class="op">&gt;</span>,
 }
 
-<span class="doccomment">///  Data for the ender dragon fight. </span>
+<span class="doccomment">/// Data for the ender dragon fight. </span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DragonFlight</span> {
     <span class="doccomment">/// Location of the End&#39;s exit portal that the ender dragon flies to upon it&#39;s death </span>
