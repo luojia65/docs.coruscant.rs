@@ -2324,7 +2324,7 @@
     <span class="kw">where</span>
         <span class="ident">T</span>: <span class="ident">ser</span>::<span class="ident">Serialize</span>,
     {
-        <span class="kw">if</span> <span class="ident">name</span> <span class="op">==</span> <span class="kw">crate</span>::<span class="ident">as_nbt_array</span>::<span class="ident">TOKEN_AS_ARRAY</span> {
+        <span class="kw">if</span> <span class="ident">name</span> <span class="op">==</span> <span class="kw">crate</span>::<span class="ident">as_nbt_array</span>::<span class="ident">TOKEN_ARRAY</span> {
             <span class="ident">value</span>.<span class="ident">serialize</span>(<span class="ident">ArraySerializer</span> { <span class="ident">ser</span>: <span class="self">self</span> })<span class="question-mark">?</span>;
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
         }

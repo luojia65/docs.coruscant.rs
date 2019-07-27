@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Brain",""],["EntityData",""],["Mob",""],["SleepingPos",""]]});
+initSidebarItems({"enum":[["Memory",""]],"struct":[["Brain",""],["EntityData",""],["MemoryPosition",""],["Mob",""],["SleepingPos",""]]});
