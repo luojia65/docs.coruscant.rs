@@ -53,16 +53,28 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">serde</span>::<span class="ident">Serialize</span>;
 
 <span class="doccomment">/// Mark that a field should be serialized as an NBT array instread of a list of</span>
 <span class="doccomment">/// elements.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// You may use this module by adding `#[serde(serialize_with = &quot;as_nbt_array&quot;)]` onto fields</span>
-<span class="doccomment">/// that need to be serialized into arrays, for example ByteArray instead of a ListTag</span>
-<span class="doccomment">/// of bytes. By adding it onto a serde sequence of `i8`, `i32` or `i64`, the serializer</span>
-<span class="doccomment">/// guarantees to procceed them into ByteArray, IntArray or LongArray.</span>
+<span class="doccomment">/// You may use this module by adding an attribute</span>
+<span class="doccomment">/// </span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// #[serde(serialize_with = &quot;as_nbt_array&quot;)]</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// </span>
+<span class="doccomment">/// onto fields that need to be serialized into arrays rather than lists. </span>
+<span class="doccomment">/// By adding it onto a serde sequence of `i8`, `i32` or `i64`, the serializer</span>
+<span class="doccomment">/// guarantees to procceed them into ByteArray, IntArray or LongArray instead of</span>
+<span class="doccomment">/// a ListTag of bytes, ints or longs.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">///</span>
