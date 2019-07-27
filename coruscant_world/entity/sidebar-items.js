@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Leash",""],["Memory",""]],"struct":[["ActiveEffect",""],["Attribute",""],["Brain",""],["EntityData",""],["MemoryPosition",""],["Mob",""],["Modifier",""],["SleepingPos",""]]});
+initSidebarItems({"enum":[["Leash",""],["Memory",""]],"struct":[["ActiveEffect",""],["Attribute",""],["Brain",""],["EntityData",""],["Mob",""],["Modifier",""],["SleepingPos",""]]});
